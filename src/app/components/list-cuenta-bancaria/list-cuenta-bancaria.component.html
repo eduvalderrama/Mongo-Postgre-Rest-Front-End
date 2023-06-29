@@ -1,0 +1,56 @@
+<div class="contenedor">
+    <h3 class="title">Lista de Cuentas Bancarias</h3>
+
+
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" style="margin-bottom: 20px;"> 
+
+            <ng-container matColumnDef="idcuenta">
+              <th mat-header-cell *matHeaderCellDef> # </th>
+              <td mat-cell *matCellDef="let element"> {{element.idCuentaBancaria}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef> Número </th>
+              <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="flag">
+              <th mat-header-cell *matHeaderCellDef> Estado </th>
+              
+              <td mat-cell *matCellDef="let element">
+                <span style="font-weight: 500; color: white; padding: 5px; border-radius: 5px;" [style.background-color]="element.flag == 2 ? 'green' : 'red'">
+                  {{ element.flag == 2 ? "Activo" : "Inactivo" }}
+                </span>	  
+              </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="banco">
+              <th mat-header-cell *matHeaderCellDef> Banco </th>
+              <td mat-cell *matCellDef="let element"> {{element.banco.nombre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="moneda">
+              <th mat-header-cell *matHeaderCellDef> Moneda </th>
+              <td mat-cell *matCellDef="let element"> {{element.tipoMoneda.descripcion}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <ng-template #noData>
+                  <td class="mat-cell" colspan="19">
+                    No hay datos.
+                  </td>
+                </ng-template>
+            </tr>
+
+          </table>
+          <div [hidden]="desactivePaginator">
+            <mat-paginator 
+            [pageSizeOptions]="[8, 15, 20]"
+            showFirstLastButtons
+            aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+        </div>
+            
